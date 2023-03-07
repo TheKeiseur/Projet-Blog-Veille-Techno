@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
 export interface Post extends mongoose.Document {
+  title: string,
   content: string,
   date: Date,
   author_id: mongoose.Types.ObjectId,
@@ -12,6 +13,7 @@ export interface Post extends mongoose.Document {
 }
 
 const PostSchema: mongoose.Schema<Post> = new Schema({
+  title: {type: String, required: true, default: ''},
   content: {type: String, required: true, default: ''},
   author_id: {type: Schema.Types.ObjectId, ref: 'User', required: true},
   image: {type: String, required: true, default: ''},
