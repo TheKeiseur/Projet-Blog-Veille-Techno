@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export interface CustomRequest extends Request {
-  token: string | JwtPayload;
+  token: DecodedToken;
+}
+
+export interface DecodedToken extends JwtPayload {
+  id: string,
+  isAdmin: string
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,7 +21,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
       return res.status(400).send('No token provided for authentification');
     }
 
-    (req as CustomRequest).token = jwt.verify(token!, process.env.AUTH_SECRET as Secret);
+    (req as CustomRequest).token = jwt.verify(token!, process.env.AUTH_SECRET as Secret) as DecodedToken;
 
     next();
   } catch (err) {

@@ -24,7 +24,7 @@ export async function deletePostById(id: string): Promise<boolean | null> {
 }
 
 export async function editPost(payload: Post): Promise<Post | null> {
-  return PostModel.findOneAndUpdate({_id: payload._id}, {content: payload.content}, {new: true});
+  return PostModel.findByIdAndUpdate(payload._id, {content: payload.content, title: payload.title}, {new: true});
 }
 
 export async function getRecentPosts(): Promise<PostCard[]> {

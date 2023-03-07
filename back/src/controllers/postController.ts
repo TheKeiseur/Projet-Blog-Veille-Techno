@@ -1,7 +1,8 @@
 import express, {Response} from "express";
 import * as postService from "../services/postService.js";
 import {getErrorMessage} from "../utils/errors.js";
-import {Post} from "../models/Post.js";
+import {PostModel} from "../models/Post.js";
+import {CustomRequest} from "../middlewares/auth.js";
 
 export async function createPost(req: express.Request, res: express.Response): Promise<Response> {
   try {
@@ -18,18 +19,29 @@ export async function findPostById(req: express.Request, res: express.Response):
 }
 
 export async function deletePostById(req: express.Request, res: express.Response): Promise<Response> {
-  const response = await postService.deletePostById(req.body.id);
-  return response
-    ? res.status(200).send('The post has been deleted')
-    : res.status(404).send(`Post with id ${req.body.id} was either not found or could not be deleted`);
+  const postToDelete = await PostModel.findById(req.params.id);
+  const token = (req as CustomRequest).token;
+  if (!postToDelete) {
+    return res.status(404).send(`Post with id ${req.params.id} was either not found or could not be deleted`);
+  }
+  if (postToDelete!.author_id.toString() !== token.id && !token.isAdmin) {
+    return res.status(401).send(`The post with id ${req.params.id} does not belong to you`);
+  }
+  await postService.deletePostById(req.params.id);
+  return res.status(200).send('The post has been deleted');
 }
 
 export async function updatePost(req: express.Request, res: express.Response): Promise<Response> {
-  const payload: Post = req.body;
-  const updatedPost = await postService.editPost(payload);
-  return updatedPost
-    ? res.status(200).send(updatedPost)
-    : res.status(404).send(`Post with id ${payload._id} was not found or update failed`);
+  const postToUpdate = await PostModel.findById(req.body._id);
+  const token = (req as CustomRequest).token;
+  if (!postToUpdate) {
+    return res.status(404).send(`Post with id ${req.body._id} was either not found or could not be deleted`);
+  }
+  if (postToUpdate.author_id.toString() !== token.id && !token.isAdmin) {
+    return res.status(401).send('This post does not belong to you');
+  }
+  const updatedPost = await postService.editPost(req.body);
+  return res.status(200).send(updatedPost);
 }
 
 export async function getRecentPosts(req: express.Request, res: express.Response): Promise<any> {

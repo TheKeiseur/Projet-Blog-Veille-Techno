@@ -12,6 +12,7 @@ router.get('/post', auth, postController.getRecentPosts)
 router.get('/post/:id', auth, postController.findPostById);
 router.post('/post/create', auth, postController.createPost);
 router.delete('/post/:id', auth, postController.deletePostById);
+// @ts-ignore
 router.put('/post', auth, postController.updatePost);
 
 export default router;
