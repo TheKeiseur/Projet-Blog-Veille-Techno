@@ -23,9 +23,22 @@ export async function login(loginRequest: LoginRequest): Promise<LoginResponseDt
   }
   const isMatch = bcrypt.compareSync(loginRequest.password, foundUser.password);
   if (isMatch) {
-    const payload = {...foundUser};
+    const payload = mapToPayload(foundUser);
     return {token: jwt.sign(payload, AUTH_SECRET as Secret, {expiresIn: EXPIRES_IN})};
   } else {
     throw new Error('Unauthorized');
+  }
+}
+
+function mapToPayload(user: User) {
+  return {
+    id: user._id.toString(),
+    gender: user.gender,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    photo: user.photo,
+    category: user.category,
+    isAdmin: user.isAdmin
   }
 }
