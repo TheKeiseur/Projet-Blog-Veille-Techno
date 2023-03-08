@@ -3,6 +3,7 @@ import * as postService from "../services/postService.js";
 import {getErrorMessage} from "../utils/errors.js";
 import {PostModel} from "../models/Post.js";
 import {CustomRequest} from "../middlewares/auth.js";
+import {LikeOrDislike} from "../types/LikeOrDislike.js";
 
 export async function createPost(req: express.Request, res: express.Response): Promise<Response> {
   try {
@@ -44,8 +45,13 @@ export async function updatePost(req: express.Request, res: express.Response): P
   return res.status(200).send(updatedPost);
 }
 
-export async function getRecentPosts(req: express.Request, res: express.Response): Promise<any> {
+export async function getRecentPosts(req: express.Request, res: express.Response): Promise<Response> {
   const recentPosts = await postService.getRecentPosts();
   console.log(recentPosts);
   return res.status(200).send({posts: recentPosts});
+}
+
+export async function likeOrDislike(req: express.Request, res: express.Response): Promise<Response> {
+  const newCount = await postService.likeOrDislike(req.body as LikeOrDislike);
+  return res.status(200).send(newCount);
 }

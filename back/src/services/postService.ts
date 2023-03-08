@@ -2,6 +2,7 @@ import {Post, PostModel} from "../models/Post.js";
 import {PostRequest} from "../types/PostRequest.js";
 import {UserModel} from "../models/User.js";
 import {PopulatedPost, PostCard} from "../types/PostCard.js";
+import {LikeOrDislike} from "../types/LikeOrDislike.js";
 
 export async function createPost(post: PostRequest): Promise<Post> {
   const user = await UserModel.findById(post.author_id).exec();
@@ -30,6 +31,12 @@ export async function editPost(payload: Post): Promise<Post | null> {
 export async function getRecentPosts(): Promise<PostCard[]> {
   const populatedPosts = await PostModel.find<PopulatedPost>().populate('author_id').sort({_id: -1}).limit(6).exec();
   return mapToCards(populatedPosts);
+}
+
+export async function likeOrDislike(likeOrDislike: LikeOrDislike) {
+  const {postId, like} = likeOrDislike;
+  const value = like ? 1 : -1;
+  return PostModel.findByIdAndUpdate(postId, {$inc: {likeCount: value}}, {new: true});
 }
 
 export function mapToCards(posts: PopulatedPost[]): PostCard[] {

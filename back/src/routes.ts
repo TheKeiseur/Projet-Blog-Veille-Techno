@@ -16,6 +16,7 @@ router.get('/post/:id', auth, postController.findPostById);
 router.post('/post/create', auth, postController.createPost);
 router.delete('/post/:id', auth, postController.deletePostById);
 router.put('/post', auth, postController.updatePost);
+router.post('/post/like', auth, postController.likeOrDislike);
 
 // User routes //
 router.get('/user/:id', auth, userController.getUserById);
