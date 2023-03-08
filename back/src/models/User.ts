@@ -12,7 +12,8 @@ export interface User extends mongoose.Document {
   password: string,
   photo: string,
   category: string,
-  isAdmin: boolean
+  isAdmin: boolean,
+  favoredPosts: string[]
 }
 
 const UserSchema: mongoose.Schema<User> = new Schema({
@@ -23,7 +24,8 @@ const UserSchema: mongoose.Schema<User> = new Schema({
   password: {type: String, required: true},
   photo: {type: String, required: true},
   category: {type: String, required: true},
-  isAdmin: {type: Boolean, required: true, default: false}
+  isAdmin: {type: Boolean, required: true, default: false},
+  favoredPosts: [{type: String, ref: 'Post', default: []}]
 });
 
 UserSchema.pre('save', async function (next) {
