@@ -3,6 +3,7 @@ import * as loginController from './controllers/loginController.js';
 import * as postController from './controllers/postController.js';
 import * as userController from './controllers/userController.js';
 import {auth} from "./middlewares/auth.js";
+import {verifyAdmin} from "./middlewares/admin.js";
 
 const router: Router = Router();
 
@@ -18,5 +19,7 @@ router.put('/post', auth, postController.updatePost);
 
 // User routes //
 router.get('/user/:id', auth, userController.getUserById);
+router.delete('/user/:id', auth, verifyAdmin, userController.deleteUserById);
+router.post('/user/create', auth, verifyAdmin, userController.createUser);
 
 export default router;
