@@ -31,6 +31,7 @@ function mapToPayload(user: User) {
     email: user.email,
     photo: user.photo,
     category: user.category,
-    isAdmin: user.isAdmin
+    isAdmin: user.isAdmin,
+    favoredPosts: user.favoredPosts
   }
 }
