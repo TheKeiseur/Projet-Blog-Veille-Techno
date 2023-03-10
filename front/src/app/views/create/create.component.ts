@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-create',
@@ -7,10 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() {
+  component = 'post';
+
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.route.pathFromRoot[1].url.subscribe(segments => this.component = segments[0].path);
   }
 
 }

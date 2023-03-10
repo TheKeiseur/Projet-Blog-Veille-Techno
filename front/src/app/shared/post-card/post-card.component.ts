@@ -31,7 +31,6 @@ export class PostCardComponent implements OnInit {
     this.isAdmin = this.authService.getIsAdmin();
     this.isUserPost = this.authService.connectedUser?.id === this.postCard.author_id;
     this.isFavoredPost = this.authService.connectedUser!.favoredPosts.includes(this.postCard.id);
-    console.log(this.isFavoredPost);
   }
 
   getFormattedDate(date: Date): string {

@@ -14,18 +14,23 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/create',
-    loadChildren: () => import('./views/create/create.module').then(m => m.CreateModule),
-    canActivate: [AuthGuard, AdminGuard]
-  },
-  {
     path: 'favored-posts',
     loadChildren: () => import('./views/favored-posts/favored-posts.module').then(m => m.FavoredPostsModule),
     canActivate: [AuthGuard]
   },
   {
+    path: 'user/create',
+    loadChildren: () => import('./views/create/create.module').then(m => m.CreateModule),
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
     path: 'user/:id/edit',
     loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'post/create',
+    loadChildren: () => import('./views/create/create.module').then(m => m.CreateModule),
     canActivate: [AuthGuard]
   },
   {

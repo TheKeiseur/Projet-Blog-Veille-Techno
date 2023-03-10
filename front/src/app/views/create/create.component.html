@@ -1,4 +1,10 @@
 <section class="text-center">
-  <h1 class="border-bottom pb-3">Créer un utilisateur</h1>
-  <app-user-form [isAdd]="true"></app-user-form>
+  <div *ngIf="component === 'user'; else postEdit">
+    <h1 class="border-bottom pb-3">Créer un utilisateur</h1>
+    <app-user-form [isAdd]="true"></app-user-form>
+  </div>
+  <ng-template #postEdit>
+    <h1 class="border-bottom pb-3">Créer un post</h1>
+    <app-post-form [isAdd]="true"></app-post-form>
+  </ng-template>
 </section>

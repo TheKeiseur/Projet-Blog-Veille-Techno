@@ -1,1 +1,27 @@
-<p>post-form works!</p>
+<form [formGroup]="form">
+  <div class="row justify-content-center">
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-center">
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Catégorie</mat-label>
+      <input matInput formControlName="category">
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-center">
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Contenu</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-center">
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>URL de la photo</mat-label>
+      <input matInput formControlName="photo">
+    </mat-form-field>
+  </div>
+  <button mat-flat-button (click)="submit()" color="primary" [disabled]="form.invalid">Valider</button>
+</form>

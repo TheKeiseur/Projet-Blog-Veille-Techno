@@ -15,6 +15,10 @@
       <mat-icon>person</mat-icon>
       Ajouter
     </a>
+    <a mat-button aria-label="List button" routerLink="/post/create" class="nav-link">
+      <mat-icon>newspaper</mat-icon>
+      Poster
+    </a>
     <a mat-button [routerLink]="'/user/'+connectedUser!.id+'/edit'" class="nav-link">
       <img [src]="connectedUser!.photo" alt="User picture" class="mat-mdc-card-avatar">
     </a>

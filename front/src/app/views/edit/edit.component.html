@@ -1,10 +1,10 @@
 <section class="text-center">
   <div *ngIf="component === 'user'; else postEdit">
-  <h1 class="border-bottom pb-3">Modifier le profil</h1>
-  <app-user-form [isAdd]="false" [user]="user" *ngIf="user"></app-user-form>
+    <h1 class="border-bottom pb-3">Modifier le profil</h1>
+    <app-user-form [isAdd]="false" [user]="user" *ngIf="user"></app-user-form>
   </div>
   <ng-template #postEdit>
     <h1 class="border-bottom pb-3">Modifier le post</h1>
-    <app-post-form></app-post-form>
+    <app-post-form [post]="post" [isAdd]="false" *ngIf="post"></app-post-form>
   </ng-template>
 </section>

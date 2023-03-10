@@ -46,7 +46,6 @@ export class AuthService {
   setSession(token: string): User {
     localStorage.setItem('id_token', token);
     const tokenInfo = this.jwtService.decodeToken(token);
-    console.log(tokenInfo);
     this.setConnectedUser(tokenInfo);
     return tokenInfo;
   }
