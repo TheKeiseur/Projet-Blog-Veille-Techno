@@ -4,16 +4,18 @@ import {CommonModule} from '@angular/common';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
 import {SharedModule} from "../../shared/shared-module/shared.module";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
-    SharedModule,
     HomeRoutingModule,
+    SharedModule,
+    MatGridListModule
   ]
 })
 export class HomeModule {

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {UserCardComponent} from "../user-card/user-card.component";
+import {PostCardComponent} from "../user-card/post-card.component";
 import {UserFormComponent} from "../user-form/user-form.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -14,12 +14,15 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {PostFormComponent} from '../post-form/post-form.component';
+
 
 @NgModule({
   declarations: [
-    UserCardComponent,
+    PostCardComponent,
     UserFormComponent,
-    UserBadgeComponent
+    UserBadgeComponent,
+    PostFormComponent
   ],
   imports: [
     CommonModule,
@@ -36,13 +39,14 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatSlideToggleModule,
   ],
   exports: [
-    UserCardComponent,
+    PostCardComponent,
     UserFormComponent,
     UserBadgeComponent,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    PostFormComponent
   ]
 })
 export class SharedModule {

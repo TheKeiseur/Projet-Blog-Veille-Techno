@@ -14,21 +14,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'users',
-    loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule),
-    // canActivate: [AuthGuard]
-  },
-  {
-    path: 'reactive',
-    loadChildren: () => import('./reactive-state/reactive-state.module').then(m => m.ReactiveStateModule)
-  },
-  {
     path: 'user/create',
     loadChildren: () => import('./views/create/create.module').then(m => m.CreateModule),
     canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'user/:id/edit',
+    loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'post/:id/edit',
     loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule),
     canActivate: [AuthGuard]
   },

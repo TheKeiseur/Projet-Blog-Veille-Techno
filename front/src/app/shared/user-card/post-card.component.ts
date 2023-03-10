@@ -1,22 +1,22 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../services/User";
 import * as moment from "moment";
-import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {PostCard} from "../../services/Post";
+import {PostService} from "../../services/post.service";
 
 @Component({
-  selector: 'app-user-card',
-  templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.scss']
+  selector: 'app-post-card',
+  templateUrl: './post-card.component.html',
+  styleUrls: ['./post-card.component.scss']
 })
-export class UserCardComponent implements OnInit {
+export class PostCardComponent implements OnInit {
 
   @Input()
-  user?: User;
+  postCard?: PostCard;
   isAdmin: boolean = false;
 
-  constructor(private userService: UserService,
+  constructor(private postService: PostService,
               private authService: AuthService,
               private router: Router) {
   }
@@ -36,7 +36,7 @@ export class UserCardComponent implements OnInit {
   }
 
   deleteUser() {
-    this.userService.deleteUserById(this.user!.id).subscribe(() => this.router.navigateByUrl('/users'));
+    // this.postService.deleteUserById(this.postCard!.id).subscribe(() => this.router.navigateByUrl('/users'));
   }
 
 }

@@ -1,28 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../services/User";
-import {UserService} from "../../services/user.service";
-import {AuthService} from "../../services/auth.service";
+import {PostCard} from "../../services/Post";
+import {PostService} from "../../services/post.service";
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-users',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  randUser?: User;
-  isAdmin: boolean = false;
+  posts: PostCard[] = [];
 
-  constructor(private userService: UserService,
-              private authService: AuthService) {
+  constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
-    this.getRandomUser();
-    this.isAdmin = this.authService.getIsAdmin();
+    // this.postService.getAllUsers().subscribe(posts => this.posts = posts);
   }
 
-  getRandomUser() {
-    this.userService.getRandomUser().subscribe(user => this.randUser = user);
+  onFilter($event: PostCard[]) {
+    this.posts = $event;
   }
+
 }

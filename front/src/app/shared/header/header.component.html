@@ -7,9 +7,9 @@
   </a>
   <span class="example-spacer"></span>
   <div *ngIf="isLoggedIn(); else login">
-    <a mat-button aria-label="List button" routerLink="/reactive" class="nav-link">
+    <a mat-button aria-label="List button" routerLink="/home" class="nav-link">
       <mat-icon>list</mat-icon>
-      Liste
+      Favoris
     </a>
     <a mat-button aria-label="List button" routerLink="/user/create" class="nav-link" *ngIf="connectedUser!.isAdmin">
       <mat-icon>person</mat-icon>

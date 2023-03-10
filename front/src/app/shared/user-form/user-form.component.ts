@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../../services/User";
 import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
@@ -31,14 +31,16 @@ export class UserFormComponent implements OnInit {
       firstname: new FormControl(this.user?.firstname, [Validators.required]),
       email: new FormControl(this.user?.email, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
-      confirmPassword: new FormControl(null),
-      phone: new FormControl(this.user?.phone, [Validators.required]),
-      birthdate: new FormControl(this.user?.birthdate, [Validators.required]),
-      city: new FormControl(this.user?.city, [Validators.required]),
-      country: new FormControl(this.user?.country, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required]),
       photo: new FormControl(this.user?.photo, [Validators.required]),
       isAdmin: new FormControl(this.user?.isAdmin),
     });
+    if (!this.isAdd) {
+      this.form.addValidators(this.createCompareValidator(
+        this.form.get('password')!,
+        this.form.get('confirmPassword')!
+      ));
+    }
   }
 
   get email() {
@@ -72,5 +74,14 @@ export class UserFormComponent implements OnInit {
     const user: User = this.form.value;
     user.id = this.user!.id;
     this.userService.updateUser(user).subscribe(() => this.router.navigateByUrl('/users'));
+  }
+
+  createCompareValidator(controlOne: AbstractControl, controlTwo: AbstractControl) {
+    return () => {
+      if (controlOne.value !== controlTwo.value)
+        return {match_error: 'Value does not match'};
+      return null;
+    };
+
   }
 }

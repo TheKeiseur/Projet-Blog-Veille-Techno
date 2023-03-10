@@ -11,10 +11,12 @@ import {concatMap} from "rxjs";
 })
 export class EditComponent implements OnInit {
 
+  component: string = 'post';
   user?: User;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute) {
+
     this.route.params.pipe(
       concatMap(params => {
         const id = params['id'];
@@ -23,6 +25,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.pathFromRoot[1].url.subscribe(value => this.component = value[0].path);
   }
 
 }

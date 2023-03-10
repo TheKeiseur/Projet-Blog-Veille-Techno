@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "./User";
 import {environment} from "../../environments/environment";
+import {PostCard} from "./Post";
 
 @Injectable({
   providedIn: 'root'
@@ -21,29 +22,20 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    const userDto = {
-      "user": user
-    }
-    return this.http.post<User>(`${environment.baseUrl}/admin/add`, userDto);
+    return this.http.post<User>(`${environment.baseUrl}/user/create`, user);
   }
 
   updateUser(user: User): Observable<User> {
-    const userDto = {
-      "user": user
-    }
-    return this.http.put<User>(`${environment.baseUrl}/user/${user.id}`, userDto);
+    return this.http.put<User>(`${environment.baseUrl}/user`, user);
   }
 
   deleteUserById(id: string) {
-    return this.http.delete(`${environment.baseUrl}/admin/delete/${id}`);
+    return this.http.delete(`${environment.baseUrl}/user/${id}`);
   }
 
   //
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.baseUrl}/users`);
-  }
-  getNbUser(): Observable<any> {
-    return this.http.get<User[]>(`${environment.baseUrl}/user-count`);
+  getFavoredPosts(): Observable<PostCard[]> {
+    return this.http.get<PostCard[]>(`${environment.baseUrl}/user/favored-posts/posts`);
   }
 
 }
