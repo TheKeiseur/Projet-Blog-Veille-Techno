@@ -2,6 +2,7 @@ import {User, UserModel} from "../models/User.js";
 import {PostModel} from "../models/Post.js";
 import {PopulatedPost} from "../types/PostCard.js";
 import {mapToCards} from "./postService.js";
+import {AddToFavoredRequest} from "../types/AddToFavoredRequest.js";
 
 export async function getUserById(id: string): Promise<User> {
   const user: User | null = await UserModel.findById(id);
@@ -27,8 +28,12 @@ export async function createUser(user: User): Promise<User> {
   return await UserModel.create(user);
 }
 
-export async function addFavoredPost(postId: string, userId: string) {
-  return UserModel.updateOne({_id: userId, favoredPosts: {$ne: postId}}, {$push: {favoredPosts: postId}}, {new: true});
+export async function addFavoredPost(request: AddToFavoredRequest) {
+  const {postId, userId, add} = request;
+  const update = add
+    ? {$push: {favoredPosts: postId}}
+    : {$pull: {favoredPosts: postId}};
+  return UserModel.updateOne({_id: userId, favoredPosts: {$ne: postId}}, update, {new: true});
 }
 
 export async function getFavoredPostsAsCards(userId: string) {

@@ -3,6 +3,7 @@ import * as userService from "../services/userService.js";
 import {getErrorMessage} from "../utils/errors.js";
 import {User, UserModel} from "../models/User.js";
 import {CustomRequest} from "../middlewares/auth.js";
+import {AddToFavoredRequest} from "../types/AddToFavoredRequest.js";
 
 export async function getUserById(req: express.Request, res: express.Response): Promise<Response> {
   try {
@@ -50,8 +51,6 @@ export async function getFavoredPosts(req: express.Request, res: express.Respons
 }
 
 export async function addToFavoredPosts(req: express.Request, res: express.Response): Promise<Response> {
-  const postId = req.params.id;
-  const userId = (req as CustomRequest).token.id;
-  const updatedList = await userService.addFavoredPost(postId, userId);
+  const updatedList = await userService.addFavoredPost(req.body as AddToFavoredRequest);
   return res.status(200).send(updatedList);
 }
