@@ -19,6 +19,11 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard]
   },
   {
+    path: 'favored-posts',
+    loadChildren: () => import('./views/favored-posts/favored-posts.module').then(m => m.FavoredPostsModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'user/:id/edit',
     loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule),
     canActivate: [AuthGuard]

@@ -14,7 +14,9 @@ export class PostCardComponent implements OnInit {
 
   @Input()
   postCard?: PostCard;
-  isAdmin: boolean = false;
+  isAdmin = false;
+  isUserPost = false;
+  hasBeenLiked = false;
 
   constructor(private postService: PostService,
               private authService: AuthService,
@@ -23,6 +25,7 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin = this.authService.getIsAdmin();
+    this.isUserPost = this.authService.connectedUser?.id === this.postCard?.author_id;
   }
 
   calcAge(dateString: string) {
@@ -35,8 +38,16 @@ export class PostCardComponent implements OnInit {
     return moment(birthday).locale('fr').format('DD MMMM');
   }
 
-  deleteUser() {
-    // this.postService.deleteUserById(this.postCard!.id).subscribe(() => this.router.navigateByUrl('/users'));
+  deleteCard() {
+    this.postService.deletePost(this.postCard!.id).subscribe(() => this.router.navigateByUrl('/home'));
   }
 
+  likeCard() {
+    if (!this.hasBeenLiked) {
+      this.postCard!.likeCount++;
+      this.postService.likeOrDislike({postId: this.postCard!.id, like: true}).subscribe(value => console.log(value));
+    }
+    this.hasBeenLiked = true;
+    console.log(this.hasBeenLiked);
+  }
 }

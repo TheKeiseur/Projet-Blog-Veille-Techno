@@ -2,12 +2,12 @@
   <a mat-button aria-label="List button" routerLink="/home" class="nav-link">
     <h1 class="align-vertical">
       <mat-icon>home</mat-icon>
-      Intranet
+      Blog
     </h1>
   </a>
   <span class="example-spacer"></span>
   <div *ngIf="isLoggedIn(); else login">
-    <a mat-button aria-label="List button" routerLink="/home" class="nav-link">
+    <a mat-button aria-label="List button" routerLink="/favored-posts" class="nav-link">
       <mat-icon>list</mat-icon>
       Favoris
     </a>

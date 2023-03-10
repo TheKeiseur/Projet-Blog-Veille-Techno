@@ -1,0 +1,7 @@
+<h1 class="text-center">Favoris</h1>
+<div *ngIf="favoredPosts; else noPostMessage">
+  <app-card-list [posts]="favoredPosts"></app-card-list>
+</div>
+<ng-template #noPostMessage>
+  <h2 class="text-center">Aucun favoris</h2>
+</ng-template>

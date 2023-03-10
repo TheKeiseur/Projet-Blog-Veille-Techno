@@ -1,20 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {HomeRoutingModule} from './home-routing.module';
-import {HomeComponent} from './home.component';
+import {FavoredPostsComponent} from "./favored-posts.component";
 import {SharedModule} from "../../shared/shared-module/shared.module";
-
+import {FavoredPostsRoutingModule} from "./favored-posts-routing.module";
 
 @NgModule({
   declarations: [
-    HomeComponent
+    FavoredPostsComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    FavoredPostsRoutingModule,
     SharedModule
   ]
 })
-export class HomeModule {
+export class FavoredPostsModule {
 }

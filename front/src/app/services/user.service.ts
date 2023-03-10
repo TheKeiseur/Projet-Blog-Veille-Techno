@@ -33,7 +33,6 @@ export class UserService {
     return this.http.delete(`${environment.baseUrl}/user/${id}`);
   }
 
-  //
   getFavoredPosts(): Observable<PostCard[]> {
     return this.http.get<PostCard[]>(`${environment.baseUrl}/user/favored-posts/posts`);
   }

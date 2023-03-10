@@ -1,12 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PostCardComponent} from "../user-card/post-card.component";
+import {PostCardComponent} from "../post-card/post-card.component";
 import {UserFormComponent} from "../user-form/user-form.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {UserBadgeComponent} from "../user-card/user-badge/user-badge.component";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -15,14 +14,16 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {PostFormComponent} from '../post-form/post-form.component';
+import {CardListComponent} from '../card-list/card-list.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 @NgModule({
   declarations: [
     PostCardComponent,
     UserFormComponent,
-    UserBadgeComponent,
-    PostFormComponent
+    PostFormComponent,
+    CardListComponent
   ],
   imports: [
     CommonModule,
@@ -37,16 +38,17 @@ import {PostFormComponent} from '../post-form/post-form.component';
     MatInputModule,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatGridListModule
   ],
   exports: [
     PostCardComponent,
     UserFormComponent,
-    UserBadgeComponent,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    PostFormComponent
+    PostFormComponent,
+    CardListComponent
   ]
 })
 export class SharedModule {

@@ -1,8 +1,8 @@
 @use '@angular/material' as mat;
 
 .example-card {
-  max-width: 40rem;
-  box-shadow: 0 0 12px #bababa;
+  max-width: 20rem;
+  border-radius: 0.8rem;
 }
 
 p {
@@ -12,5 +12,9 @@ p {
 .card-image {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.liked {
+  color: #A52A40FF;
 }

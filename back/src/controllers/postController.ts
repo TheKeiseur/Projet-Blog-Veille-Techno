@@ -48,7 +48,7 @@ export async function updatePost(req: express.Request, res: express.Response): P
 export async function getRecentPosts(req: express.Request, res: express.Response): Promise<Response> {
   const recentPosts = await postService.getRecentPosts();
   console.log(recentPosts);
-  return res.status(200).send({posts: recentPosts});
+  return res.status(200).send(recentPosts);
 }
 
 export async function likeOrDislike(req: express.Request, res: express.Response): Promise<Response> {

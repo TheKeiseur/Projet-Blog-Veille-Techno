@@ -1,20 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {UserBadgeComponent} from './user-badge.component';
+import {FavoredPostsComponent} from './favored-posts.component';
 
-describe('UserBadgeComponent', () => {
-  let component: UserBadgeComponent;
-  let fixture: ComponentFixture<UserBadgeComponent>;
+describe('FavoredPostsComponent', () => {
+  let component: FavoredPostsComponent;
+  let fixture: ComponentFixture<FavoredPostsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserBadgeComponent ]
+      declarations: [ FavoredPostsComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UserBadgeComponent);
+    fixture = TestBed.createComponent(FavoredPostsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

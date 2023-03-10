@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center">
+  <mat-card class="d-flex example-card justify-content-between p-0"
+            [routerLink]="'/post/'+postCard.id"
+            *ngIf="postCard">
+    <mat-card-header>
+      <img mat-card-avatar [src]="postCard.author_photo" alt="User picture">
+      <mat-card-title>{{ postCard.title }}</mat-card-title>
+      <mat-card-subtitle>{{ postCard.date }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image [src]="postCard.photo" alt="" class="card-image">
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAdmin" class="justify-content-evenly">
+      <a class="btn" [routerLink]="'/post/'+postCard.id+'/edit'" *ngIf="isAdmin || isUserPost">
+        <mat-icon color="accent">edit</mat-icon>
+      </a>
+      <a class="btn" (click)="deleteCard()">
+        <mat-icon color="accent">delete</mat-icon>
+      </a>
+      <span>
+        <a class="btn" (click)="likeCard()">
+          <mat-icon color="accent" [ngClass]="hasBeenLiked ? 'liked' : ''">thumb_up</mat-icon>
+        </a>
+        {{ postCard.likeCount }}
+      </span>
+    </mat-card-actions>
+  </mat-card>
+</div>

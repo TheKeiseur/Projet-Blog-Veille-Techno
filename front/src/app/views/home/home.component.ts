@@ -9,17 +9,13 @@ import {PostService} from "../../services/post.service";
 })
 export class HomeComponent implements OnInit {
 
-  posts: PostCard[] = [];
+  posts?: PostCard[];
 
   constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
-    // this.postService.getAllUsers().subscribe(posts => this.posts = posts);
-  }
-
-  onFilter($event: PostCard[]) {
-    this.posts = $event;
+    this.postService.getRecentPosts().subscribe(posts => this.posts = posts);
   }
 
 }
