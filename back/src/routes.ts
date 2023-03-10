@@ -23,6 +23,6 @@ router.delete('/user/:id', auth, verifyAdmin, userController.deleteUserById);
 router.put('/user', auth, userController.updateUser);
 router.post('/user/create', auth, verifyAdmin, userController.createUser);
 router.get('/user/favored-posts/posts', auth, userController.getFavoredPosts);
-router.post('/user/favored-posts/:id', auth, userController.addToFavoredPosts);
+router.post('/user/favored-posts/posts', auth, userController.addToFavoredPosts);
 
 export default router;

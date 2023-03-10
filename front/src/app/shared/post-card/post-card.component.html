@@ -1,20 +1,19 @@
 <div class="d-flex justify-content-center">
   <mat-card class="d-flex example-card justify-content-between p-0"
-            [routerLink]="'/post/'+postCard.id"
             *ngIf="postCard">
     <mat-card-header>
       <img mat-card-avatar [src]="postCard.author_photo" alt="User picture">
       <mat-card-title>{{ postCard.title }}</mat-card-title>
-      <mat-card-subtitle>{{ postCard.date }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ getFormattedDate(postCard.date) }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="action" [routerLink]="'/post/'+postCard.id">
       <img mat-card-image [src]="postCard.photo" alt="" class="card-image">
     </mat-card-content>
     <mat-card-actions *ngIf="isAdmin" class="justify-content-evenly">
       <a class="btn" [routerLink]="'/post/'+postCard.id+'/edit'" *ngIf="isAdmin || isUserPost">
         <mat-icon color="accent">edit</mat-icon>
       </a>
-      <a class="btn" (click)="deleteCard()">
+      <a class="btn" (click)="deleteCard()" *ngIf="isAdmin || isUserPost">
         <mat-icon color="accent">delete</mat-icon>
       </a>
       <span>
@@ -23,6 +22,9 @@
         </a>
         {{ postCard.likeCount }}
       </span>
+      <a class="btn d-inline-block text-end" (click)="addToFavoredPosts()">
+        <mat-icon color="accent" [ngClass]="isFavoredPost ? 'liked' : ''">favorite</mat-icon>
+      </a>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -1,0 +1,6 @@
+<div *ngIf="post" class="text-center">
+  <h1>{{ post.title }}</h1>
+  <h3>{{ getFormattedDate(post.date) }}</h3>
+  <img [src]="post.image" alt="Post photo">
+  <p>{{ post.content }}</p>
+</div>

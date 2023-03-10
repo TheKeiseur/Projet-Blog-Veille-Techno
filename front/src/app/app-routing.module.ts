@@ -34,6 +34,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'post/:id',
+    loadChildren: () => import('./views/post-detail/post-detail.module').then(m => m.PostDetailModule),
+    canActivate: [AuthGuard]
+  },
+  {
 
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
@@ -46,4 +51,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

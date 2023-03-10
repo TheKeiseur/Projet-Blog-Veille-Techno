@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "./User";
+import {AddToFavoredRequest, User} from "./User";
 import {environment} from "../../environments/environment";
-import {PostCard} from "./Post";
+import {Post, PostCard} from "./Post";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,10 @@ export class UserService {
 
   getFavoredPosts(): Observable<PostCard[]> {
     return this.http.get<PostCard[]>(`${environment.baseUrl}/user/favored-posts/posts`);
+  }
+
+  addOrRemoveFavoredPost(request: AddToFavoredRequest): Observable<Post> {
+    return this.http.post<Post>(`${environment.baseUrl}/user/favored-posts/posts`, request);
   }
 
 }
