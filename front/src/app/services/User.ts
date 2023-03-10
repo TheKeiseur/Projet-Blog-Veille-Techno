@@ -10,3 +10,9 @@ export interface User {
   isAdmin: boolean;
   favoredPosts: string[];
 }
+
+export interface AddToFavoredRequest {
+  postId: string,
+  userId: string
+  add: boolean
+}

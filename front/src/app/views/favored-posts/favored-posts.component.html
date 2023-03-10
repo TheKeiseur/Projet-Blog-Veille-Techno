@@ -1,5 +1,5 @@
 <h1 class="text-center">Favoris</h1>
-<div *ngIf="favoredPosts; else noPostMessage">
+<div *ngIf="favoredPosts && favoredPosts.length; else noPostMessage">
   <app-card-list [posts]="favoredPosts"></app-card-list>
 </div>
 <ng-template #noPostMessage>

@@ -33,7 +33,7 @@ export async function addFavoredPost(request: AddToFavoredRequest) {
   const update = add
     ? {$push: {favoredPosts: postId}}
     : {$pull: {favoredPosts: postId}};
-  return UserModel.updateOne({_id: userId, favoredPosts: {$ne: postId}}, update, {new: true});
+  return UserModel.updateOne({_id: userId}, update, {new: true});
 }
 
 export async function getFavoredPostsAsCards(userId: string) {

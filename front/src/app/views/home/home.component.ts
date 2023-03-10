@@ -3,7 +3,7 @@ import {PostCard} from "../../services/Post";
 import {PostService} from "../../services/post.service";
 
 @Component({
-  selector: 'app-users',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
