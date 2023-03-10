@@ -11,6 +11,10 @@ export async function getUserById(id: string): Promise<User> {
   return user;
 }
 
+export async function editUser(payload: User): Promise<User | null> {
+  return UserModel.findByIdAndUpdate(payload._id, payload, {new: true});
+}
+
 export async function deleteUserById(id: string): Promise<boolean | null> {
   return UserModel.findByIdAndDelete(id);
 }

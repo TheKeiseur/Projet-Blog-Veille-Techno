@@ -8,14 +8,6 @@ import {LoginRequest} from "../types/LoginRequest.js";
 dotenv.config();
 const {AUTH_SECRET, EXPIRES_IN} = process.env;
 
-export async function register(user: User): Promise<User> {
-  try {
-    return await UserModel.create(user);
-  } catch (error) {
-    throw error;
-  }
-}
-
 export async function login(loginRequest: LoginRequest): Promise<LoginResponseDto> {
   const foundUser = await UserModel.findOne({email: loginRequest.email});
   if (!foundUser) {

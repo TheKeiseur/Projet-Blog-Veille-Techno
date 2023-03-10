@@ -1,7 +1,7 @@
 import express, {Response} from "express";
 import * as userService from "../services/userService.js";
 import {getErrorMessage} from "../utils/errors.js";
-import {User} from "../models/User.js";
+import {User, UserModel} from "../models/User.js";
 import {CustomRequest} from "../middlewares/auth.js";
 
 export async function getUserById(req: express.Request, res: express.Response): Promise<Response> {
@@ -11,6 +11,19 @@ export async function getUserById(req: express.Request, res: express.Response): 
   } catch (error) {
     return res.status(404).send(getErrorMessage(error));
   }
+}
+
+export async function updateUser(req: express.Request, res: express.Response): Promise<Response> {
+  const userToUpdate = await UserModel.findById(req.body.id);
+  const token = (req as CustomRequest).token;
+  if (!userToUpdate) {
+    return res.status(404).send(`User with id ${req.body._id} was either not found or could not be deleted`);
+  }
+  if (userToUpdate._id.toString() !== token.id && !token.isAdmin) {
+    return res.status(401).send('This post does not belong to you');
+  }
+  const updatedUser = await userService.editUser(req.body);
+  return res.status(200).send(updatedUser);
 }
 
 export async function deleteUserById(req: express.Request, res: express.Response): Promise<Response> {
