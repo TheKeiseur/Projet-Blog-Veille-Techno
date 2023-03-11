@@ -9,7 +9,7 @@
     <mat-card-content class="action" [routerLink]="'/post/'+postCard.id">
       <img mat-card-image [src]="postCard.photo" alt="" class="card-image">
     </mat-card-content>
-    <mat-card-actions *ngIf="isAdmin" class="justify-content-evenly">
+    <mat-card-actions class="justify-content-evenly">
       <a class="btn" [routerLink]="'/post/'+postCard.id+'/edit'" *ngIf="isAdmin || isUserPost">
         <mat-icon color="accent">edit</mat-icon>
       </a>
