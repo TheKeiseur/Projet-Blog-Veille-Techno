@@ -1,4 +1,7 @@
 <h1 class="text-center">Home</h1>
+<mat-form-field class="col-md-4">
+  <input matInput [formControl]="searchControl" placeholder="Rechercher par titre ou catégorie">
+</mat-form-field>
 <div *ngIf="posts">
-  <app-card-list [posts]="posts"></app-card-list>
+  <app-card-list [posts]="tempArray"></app-card-list>
 </div>

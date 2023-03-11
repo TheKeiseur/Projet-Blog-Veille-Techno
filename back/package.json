@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-esm ./src/server.ts",
     "start:prod": "npm run build && node ./dist/src/server.js",
-    "start:nodemon": "nodemon",
+    "start": "nodemon",
     "build": "npx tsc"
   },
   "keywords": [],
